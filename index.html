@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function start_typing_text(){
+            var string_array=["I'm Romanjan","I'm Gunjan","I'm Avinab","I'm Anurag","I'm Mrinmoy"];
+            var string=""; var string_length=string.length; var speed=60;
+            var text_div=document.getElementById("text_div");
+            var i=0; var j=0; var temp_string=""; var state=true; var state_b=true;
+            var k=0; var pause_duration=30;
+            var interval=setInterval(() => {
+                if(state_b){ if(j==string_array.length){j=0;}string=string_array[j]; 
+                string_length=string.length; state_b=false; j++;}
+                if(state){
+                    if(i==string_length-1){
+                        state=false; k=0;
+                    }
+                    temp_string=temp_string+string.charAt(i);
+                    text_div.innerHTML=temp_string+"|";
+                    i++;
+                }
+                else{
+                    if(k>pause_duration){
+                        temp_string=temp_string.substr(0,i);
+                        text_div.innerHTML=temp_string+"|";
+                        i=i-1;
+                        if(i==-1){
+                            state=true; state_b=true;
+                            i=0;
+                        }
+                    }
+                    k++;
+                }
+                
+            }, speed);
+        }
+    </script>
+</head>
+<body onload="start_typing_text();">
+    <div id="text_div"></div>
+</body>
+</html>
